@@ -29,7 +29,7 @@ WNNetworkTool 是一个功能强大的 Swift 网络库，模仿 Alamofire 设计
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/iOS-NetworkTool.git", from: "1.0.0")
+    .package(url: "https://github.com/Git-Lonnie/iOS-NetworkTool.git", from: "1.0.0")
 ]
 ```
 
