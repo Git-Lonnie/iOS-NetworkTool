@@ -1,4 +1,4 @@
-# WNNetworkTool 国产国产国产！
+# WNNetworkTool 国产国产国产！！！
 
 WNNetworkTool 是一个功能强大的 Swift 网络库，模仿 Alamofire 设计，提供了优雅的 HTTP 网络请求接口。
 
@@ -456,7 +456,7 @@ MIT License
 
 ## 作者
 
-WNNetworkTool - 一个模仿 Alamofire 的 Swift 网络库
+Wayne
 
 ## 贡献
 
