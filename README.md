@@ -469,11 +469,6 @@ Wayne
 - ✅ 完整实现 Alamofire 核心功能
 - 📚 完善文档和示例代码
 
-如果好用你可以支持下我吗？我将持续维护它！
-
-<p align="center">
-  <img src="wx.jpg" width="300" alt="微信赞赏码" />
-  <img src="zfb.jpg" width="300" alt="支付宝收款码" />
-</p>
-
 有问题联系QQ:540378725
+
+

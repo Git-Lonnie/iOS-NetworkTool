@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "WNNetworkTool",
+    name: "WayneNetwork",
     platforms: [
         .iOS(.v13),
         .macOS(.v10_15),
@@ -13,16 +13,16 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "WNNetworkTool",
-            targets: ["WNNetworkTool"]),
+            name: "WayneNetwork",
+            targets: ["WayneNetwork"]),
     ],
     targets: [
         .target(
-            name: "WNNetworkTool",
+            name: "WayneNetwork",
             dependencies: []),
         .testTarget(
-            name: "WNNetworkToolTests",
-            dependencies: ["WNNetworkTool"]),
+            name: "WayneNetworkTests",
+            dependencies: ["WayneNetwork"]),
     ]
 )
 

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import WNNetworkTool
+@testable import WayneNetwork
 
 final class WNNetworkToolTests: XCTestCase {
     
