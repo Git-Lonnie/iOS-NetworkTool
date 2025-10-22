@@ -9,8 +9,12 @@ import Foundation
 
 #if canImport(UniformTypeIdentifiers)
 import UniformTypeIdentifiers
-#elseif canImport(MobileCoreServices)
+#endif
+
+#if os(iOS) || os(tvOS) || os(watchOS)
 import MobileCoreServices
+#elseif os(macOS)
+import CoreServices
 #endif
 
 /// 多部分表单数据
@@ -185,23 +189,63 @@ open class MultipartFormData {
     }
     
     private func mimeType(forPathExtension pathExtension: String) -> String {
+        // 使用新的 UniformTypeIdentifiers (iOS 14+, macOS 11+)
         if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
             #if canImport(UniformTypeIdentifiers)
             if let utType = UTType(filenameExtension: pathExtension) {
                 return utType.preferredMIMEType ?? "application/octet-stream"
             }
             #endif
-        } else {
-            #if canImport(MobileCoreServices)
-            if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(),
-               let mimeType = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
-                return mimeType as String
-            }
-            #endif
         }
         
-        return "application/octet-stream"
+        // 旧版本使用 MobileCoreServices/CoreServices
+        #if os(iOS) || os(tvOS) || os(watchOS)
+        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(),
+           let mimeType = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
+            return mimeType as String
+        }
+        #elseif os(macOS)
+        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(),
+           let mimeType = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
+            return mimeType as String
+        }
+        #endif
+        
+        // 回退到常见的 MIME 类型映射
+        return mimeTypeMapping[pathExtension.lowercased()] ?? "application/octet-stream"
     }
+    
+    // 常见文件扩展名的 MIME 类型映射
+    private let mimeTypeMapping: [String: String] = [
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "png": "image/png",
+        "gif": "image/gif",
+        "bmp": "image/bmp",
+        "webp": "image/webp",
+        "svg": "image/svg+xml",
+        "pdf": "application/pdf",
+        "json": "application/json",
+        "xml": "application/xml",
+        "txt": "text/plain",
+        "html": "text/html",
+        "css": "text/css",
+        "js": "text/javascript",
+        "mp4": "video/mp4",
+        "mov": "video/quicktime",
+        "avi": "video/x-msvideo",
+        "mp3": "audio/mpeg",
+        "wav": "audio/wav",
+        "zip": "application/zip",
+        "rar": "application/x-rar-compressed",
+        "7z": "application/x-7z-compressed",
+        "doc": "application/msword",
+        "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "xls": "application/vnd.ms-excel",
+        "xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "ppt": "application/vnd.ms-powerpoint",
+        "pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    ]
     
     // MARK: - Private - Body Part
     
