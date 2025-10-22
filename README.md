@@ -1,6 +1,6 @@
 # WNNetworkTool 国产国产国产！！！
 
-WNNetworkTool 是一个功能强大的 Swift 网络库，模仿 Alamofire 设计，提供了优雅的 HTTP 网络请求接口。
+WNNetworkTool 是一个功能强大的 Swift 网络库，超越 Alamofire 设计，提供了优雅的 HTTP 网络请求接口。
 
 ## 特性
 
@@ -43,7 +43,7 @@ dependencies: [
 ### 基础请求
 
 ```swift
-import WNNetworkTool
+import WayneNetwork
 
 // 简单的 GET 请求
 WN.request("https://api.example.com/users")
@@ -392,7 +392,7 @@ struct CustomSerializer: ResponseSerializer {
 
 ## API 对比
 
-WNNetworkTool 与 Alamofire 的 API 对比：
+WayneNetwork 与 Alamofire 的 API 对比：
 
 | Alamofire | WNNetworkTool |
 |-----------|---------------|
@@ -411,7 +411,7 @@ WNNetworkTool 与 Alamofire 的 API 对比：
 ## 架构设计
 
 ```
-WNNetworkTool
+WayneNetwork
 ├── Core
 │   ├── HTTPMethod.swift          // HTTP 方法定义
 │   ├── HTTPHeaders.swift         // HTTP 头部管理
